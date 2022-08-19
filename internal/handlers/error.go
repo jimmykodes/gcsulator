@@ -7,9 +7,10 @@ import (
 )
 
 func responseError(w http.ResponseWriter, msg string, status int) {
-	w.WriteHeader(status)
 	err := json.NewEncoder(w).Encode(map[string]string{"error": msg})
 	if err != nil {
 		log.Println("error writing json", err)
+		return
 	}
+	w.WriteHeader(status)
 }

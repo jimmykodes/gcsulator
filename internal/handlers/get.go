@@ -28,6 +28,7 @@ func Get(w http.ResponseWriter, r *http.Request) {
 		responseError(w, "not found", http.StatusNotFound)
 		return
 	}
+	defer f.Close()
 
 	if _, err := io.Copy(w, f); err != nil {
 		responseError(w, "error sending file", http.StatusInternalServerError)
